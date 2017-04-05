@@ -17,6 +17,9 @@ using System.Linq;
 
 namespace Shadowsocks.View
 {
+    /// <summary>
+    /// 菜单视图控制器
+    /// </summary>
     public class MenuViewController
     {
         // yes this is just a menu view controller
@@ -97,6 +100,7 @@ namespace Shadowsocks.View
             if (config.isDefault)
             {
                 _isFirstRun = true;
+                //显示配置窗口
                 ShowConfigForm();
             }
             else if(config.autoCheckUpdate)

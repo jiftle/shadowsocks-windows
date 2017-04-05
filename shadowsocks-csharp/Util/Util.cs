@@ -53,6 +53,10 @@ namespace Shadowsocks.Util
             return Path.Combine(GetTempPath(), filename);
         }
 
+        /// <summary>
+        /// 释放内存
+        /// </summary>
+        /// <param name="removePages"></param>
         public static void ReleaseMemory(bool removePages)
         {
             // release any unused pages
@@ -89,6 +93,11 @@ namespace Shadowsocks.Util
             }
         }
 
+        /// <summary>
+        /// 解压gzip加密的数据
+        /// </summary>
+        /// <param name="buf"></param>
+        /// <returns></returns>
         public static string UnGzip(byte[] buf)
         {
             byte[] buffer = new byte[1024];
@@ -216,6 +225,10 @@ namespace Shadowsocks.Util
             }
         }
 
+        /// <summary>
+        /// 比Windows Vista版本更高
+        /// </summary>
+        /// <returns></returns>
         public static bool IsWinVistaOrHigher()
         {
             return Environment.OSVersion.Version.Major > 5;
@@ -226,7 +239,10 @@ namespace Shadowsocks.Util
         private static extern bool SetProcessWorkingSetSize(IntPtr process,
             UIntPtr minimumWorkingSetSize, UIntPtr maximumWorkingSetSize);
 
-
+        /// <summary>
+        /// 是否支持DotNet运行时版本
+        /// </summary>
+        /// <returns></returns>
         // See: https://msdn.microsoft.com/en-us/library/hh925568(v=vs.110).aspx
         public static bool IsSupportedRuntimeVersion()
         {

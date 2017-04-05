@@ -19,11 +19,13 @@ namespace Shadowsocks
 
         /// <summary>
         /// 应用程序的主入口点。
+        /// [STAThread] single threaded apartment. 套间线程模式
         /// </summary>
         [STAThread]
         static void Main()
         {
             // Check OS since we are using dual-mode socket
+            //一旦我们使用双模套接字检查OS
             if (!Utils.IsWinVistaOrHigher())
             {
                 MessageBox.Show(I18N.GetString("Unsupported operating system, use Windows Vista at least."),
@@ -32,17 +34,21 @@ namespace Shadowsocks
             }
 
             // Check .NET Framework version
+            // 检查.Net框架版本
             if (!Utils.IsSupportedRuntimeVersion())
             {
                 MessageBox.Show(I18N.GetString("Unsupported .NET Framework, please update to 4.6.2 or later."),
                 "Shadowsocks Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+                //跳转到.Net运行时下载链接
                 Process.Start(
                     "http://dotnetsocial.cloudapp.net/GetDotnet?tfm=.NETFramework,Version=v4.6.2");
                 return;
             }
 
+            //手工释放GC
             Utils.ReleaseMemory(true);
+            //只允许启动一个程序的实例
             using (Mutex mutex = new Mutex(false, $"Global\\Shadowsocks_{Application.StartupPath.GetHashCode()}"))
             {
                 Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);

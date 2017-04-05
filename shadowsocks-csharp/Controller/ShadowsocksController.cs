@@ -17,6 +17,12 @@ using System.Linq;
 
 namespace Shadowsocks.Controller
 {
+    /// <summary>
+    /// 总控制器
+    ///     处理用户的行为
+    ///     操作UI
+    ///     底层逻辑交互
+    /// </summary>
     public class ShadowsocksController
     {
         // controller:
@@ -51,6 +57,9 @@ namespace Shadowsocks.Controller
             public string Path;
         }
 
+        /// <summary>
+        /// 流量统计
+        /// </summary>
         public class TrafficPerSecond
         {
             public long inboundCounter;
@@ -76,6 +85,9 @@ namespace Shadowsocks.Controller
 
         public event ErrorEventHandler Errored;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public ShadowsocksController()
         {
             _config = Configuration.Load();
@@ -85,11 +97,18 @@ namespace Shadowsocks.Controller
             StartTrafficStatistics(61);
         }
 
+        /// <summary>
+        /// 启动
+        /// </summary>
         public void Start()
         {
             Reload();
         }
 
+        /// <summary>
+        /// 报告错误
+        /// </summary>
+        /// <param name="e"></param>
         protected void ReportError(Exception e)
         {
             if (Errored != null)
@@ -97,7 +116,11 @@ namespace Shadowsocks.Controller
                 Errored(this, new ErrorEventArgs(e));
             }
         }
-
+       
+        /// <summary>
+        /// 获取当前的服务器
+        /// </summary>
+        /// <returns></returns>
         public Server GetCurrentServer()
         {
             return _config.GetCurrentServer();
@@ -115,11 +138,19 @@ namespace Shadowsocks.Controller
             return _config;
         }
 
+        /// <summary>
+        /// 获取策略
+        /// </summary>
+        /// <returns></returns>
         public IList<IStrategy> GetStrategies()
         {
             return _strategyManager.GetStrategies();
         }
 
+        /// <summary>
+        /// 获取当前的策略
+        /// </summary>
+        /// <returns></returns>
         public IStrategy GetCurrentStrategy()
         {
             foreach (var strategy in _strategyManager.GetStrategies())
@@ -250,6 +281,9 @@ namespace Shadowsocks.Controller
             SaveConfig(_config);
         }
 
+        /// <summary>
+        /// 停止
+        /// </summary>
         public void Stop()
         {
             if (stopped)
@@ -272,6 +306,9 @@ namespace Shadowsocks.Controller
             Encryption.RNG.Close();
         }
 
+        /// <summary>
+        /// 触摸pac文件
+        /// </summary>
         public void TouchPACFile()
         {
             string pacFilename = _pacServer.TouchPACFile();
@@ -308,6 +345,9 @@ namespace Shadowsocks.Controller
             return $"ss://{base64}{tag}";
         }
 
+        /// <summary>
+        /// 更新pac文件从GFWList
+        /// </summary>
         public void UpdatePACFromGFWList()
         {
             if (gfwListUpdater != null)
@@ -612,7 +652,7 @@ namespace Shadowsocks.Controller
 
         #endregion
 
-        #region Traffic Statistics
+        #region Traffic Statistics 流量统计
 
         private void StartTrafficStatistics(int queueMaxSize)
         {

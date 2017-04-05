@@ -9,6 +9,9 @@ using Shadowsocks.Util;
 
 namespace Shadowsocks.Controller
 {
+    /// <summary>
+    /// 日志类
+    /// </summary>
     public class Logging
     {
         public static string LogFilePath;
