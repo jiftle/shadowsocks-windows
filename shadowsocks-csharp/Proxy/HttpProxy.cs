@@ -9,6 +9,9 @@ using Shadowsocks.Util.Sockets;
 
 namespace Shadowsocks.Proxy
 {
+    /// <summary>
+    /// Http代理
+    /// </summary>
     public class HttpProxy : IProxy
     {
         private class FakeAsyncResult : IAsyncResult

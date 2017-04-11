@@ -4,7 +4,9 @@ using System.Net.Sockets;
 
 namespace Shadowsocks.Proxy
 {
-
+    /// <summary>
+    /// 代理 接口类 
+    /// </summary>
     public interface IProxy
     {
         EndPoint LocalEndPoint { get; }

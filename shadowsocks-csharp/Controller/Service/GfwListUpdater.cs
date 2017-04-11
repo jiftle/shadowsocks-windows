@@ -12,8 +12,14 @@ using Shadowsocks.Util;
 
 namespace Shadowsocks.Controller
 {
+    /// <summary>
+    /// 防火长城列表 更新
+    /// </summary>
     public class GFWListUpdater
     {
+        /// <summary>
+        /// 更新地址
+        /// </summary>
         private const string GFWLIST_URL = "https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt";
 
         public event EventHandler<ResultEventArgs> UpdateCompleted;
@@ -31,6 +37,12 @@ namespace Shadowsocks.Controller
         }
 
         private static readonly IEnumerable<char> IgnoredLineBegins = new[] { '!', '[' };
+
+        /// <summary>
+        /// 下载完成
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void http_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
         {
             try
@@ -84,6 +96,10 @@ namespace Shadowsocks.Controller
             }
         }
 
+        /// <summary>
+        /// 更新PAC从防火长城列表
+        /// </summary>
+        /// <param name="config"></param>
         public void UpdatePACFromGFWList(Configuration config)
         {
             WebClient http = new WebClient();
@@ -92,6 +108,11 @@ namespace Shadowsocks.Controller
             http.DownloadStringAsync(new Uri(GFWLIST_URL));
         }
 
+        /// <summary>
+        /// 对文件进行解密，Base64加密
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
         public static List<string> ParseResult(string response)
         {
             byte[] bytes = Convert.FromBase64String(response);

@@ -29,6 +29,9 @@ namespace Shadowsocks.Util.SystemProxy
             INVAILD_OPTION_COUNT = 5,
         };
 
+        /// <summary>
+        /// 系统代理，从资源中释放sysproxy.exe代理程序
+        /// </summary>
         static Sysproxy()
         {
             try
@@ -42,6 +45,13 @@ namespace Shadowsocks.Util.SystemProxy
             }
         }
 
+        /// <summary>
+        /// 设置IE代理
+        /// </summary>
+        /// <param name="enable"></param>
+        /// <param name="global"></param>
+        /// <param name="proxyServer"></param>
+        /// <param name="pacURL"></param>
         public static void SetIEProxy(bool enable, bool global, string proxyServer, string pacURL)
         {
             string str;
@@ -76,6 +86,11 @@ namespace Shadowsocks.Util.SystemProxy
             ExecSysproxy(arguments, out str);
         }
 
+        /// <summary>
+        /// 执行系统代理
+        /// </summary>
+        /// <param name="arguments"></param>
+        /// <param name="queryStr"></param>
         private static void ExecSysproxy(string arguments, out string queryStr)
         {
             using (var process = new Process())

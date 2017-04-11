@@ -5,6 +5,9 @@ using Newtonsoft.Json;
 
 namespace Shadowsocks.Model
 {
+    /// <summary>
+    /// 日志查看器
+    /// </summary>
     [Serializable]
     public class LogViewerConfig
     {

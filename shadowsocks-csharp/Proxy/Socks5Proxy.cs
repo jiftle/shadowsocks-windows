@@ -8,6 +8,9 @@ using Shadowsocks.Util.Sockets;
 
 namespace Shadowsocks.Proxy
 {
+    /// <summary>
+    /// socket5代理
+    /// </summary>
     public class Socks5Proxy : IProxy
     {
         private class FakeAsyncResult : IAsyncResult

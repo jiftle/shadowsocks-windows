@@ -7,6 +7,9 @@ using Newtonsoft.Json;
 
 namespace Shadowsocks.Model
 {
+    /// <summary>
+    /// 配置
+    /// </summary>
     [Serializable]
     public class Configuration
     {

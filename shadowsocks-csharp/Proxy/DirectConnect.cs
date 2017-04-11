@@ -6,6 +6,9 @@ using Shadowsocks.Util.Sockets;
 
 namespace Shadowsocks.Proxy
 {
+    /// <summary>
+    /// 直连代理
+    /// </summary>
     public class DirectConnect : IProxy
     {
         private class FakeAsyncResult : IAsyncResult
